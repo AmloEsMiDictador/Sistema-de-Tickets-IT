@@ -1,0 +1,275 @@
+/* GENERAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #f6f8fb;
+}
+
+/* LAYOUT */
+.layout {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh; /* ocupa todo el alto de la pantalla */
+  border-radius: 0; /* elimina bordes para pantalla completa */
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: none; /* si quieres que no flote */
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 80px;
+  background-color: #0b1f4a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.menu-icon {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.menu-icon.active {
+  background-color: #2563eb;
+}
+
+/* MAIN */
+.main {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+/* LEFT PANEL */
+.left-panel {
+  width: 260px;
+  background-color: #f9fafb;
+  padding: 25px;
+  border-right: 1px solid #e5e7eb;
+  overflow-y: auto;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.left-panel h3 {
+  color: #111827;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.category-list li {
+  list-style: none;
+  height: 12px;
+  margin: 12px 0;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+}
+
+.labels {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.label {
+  width: 40px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.label.yellow {
+  background-color: #fde68a;
+}
+.label.blue {
+  background-color: #c7d2fe;
+}
+.label.green {
+  background-color: #bbf7d0;
+}
+.label.red {
+  background-color: #fca5a5;
+}
+
+/* TICKETS */
+.tickets-container {
+  flex: 1;
+  padding: 25px 40px;
+  overflow-y: auto;
+}
+
+.tickets-container h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #111827;
+}
+
+.ticket {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.ticket:hover {
+  background-color: #eef2ff;
+}
+
+.ticket-info p {
+  font-size: 15px;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.priority {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.priority.high {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.priority.low {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.ticket-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ticket-user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.ticket-user p {
+  font-size: 14px;
+  color: #111827;
+}
+
+.priority-stars {
+  font-size: 18px;
+  color: #facc15; /* amarillo */
+  margin-top: 6px;
+}
+
+/* 1 estrella */
+.priority-stars[data-stars="1"]::before {
+  content: "⭐☆☆";
+}
+
+/* 2 estrellas */
+.priority-stars[data-stars="2"]::before {
+  content: "⭐⭐☆";
+}
+
+/* 3 estrellas */
+.priority-stars[data-stars="3"]::before {
+  content: "⭐⭐⭐";
+}
+.kanban-board {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  height: 100%;
+}
+
+.kanban-column {
+  flex: 1;
+  background: #f4f5f7;
+  padding: 15px;
+  border-radius: 10px;
+  min-height: 500px;
+  border: 1px solid #d1d5db;
+}
+
+.kanban-column h3 {
+  margin-bottom: 15px;
+  color: #111827;
+}
+
+.kanban-card {
+  background: white;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: grab;
+  border: 1px solid #e5e7eb;
+  transition: 0.2s;
+}
+
+.kanban-card:active {
+  cursor: grabbing;
+}
+
+.kanban-card.dragging {
+  opacity: 0.5;
+}
+
+.stars {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.ticket-id {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .main {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+}

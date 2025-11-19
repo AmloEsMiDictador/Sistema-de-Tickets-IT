@@ -1,0 +1,132 @@
+{% extends 'sideBar.html' %} {% load static %} {% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/tickets.css' %}" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="ticket-container">
+      <div class="ticket-main">
+        <h1 class="title">Crear Nuevo Ticket</h1>
+
+        <form class="ticket-detail-form">
+          <!-- FILA SUPERIOR: 3 columnas -->
+          <div class="form-row">
+            <div class="form-column">
+              <label>Título del Ticket</label>
+              <input type="text" required />
+
+              <label>Asignado a</label>
+              <select required>
+                <option selected disabled>Selecciona un técnico</option>
+                <option>Kevin</option>
+                <option>Soporte 1</option>
+                <option>Soporte 2</option>
+              </select>
+
+              <label>Solicitante</label>
+              <select required>
+                <option selected disabled>Selecciona un usuario</option>
+                <option>Usuario 1</option>
+                <option>Usuario 2</option>
+              </select>
+            </div>
+
+            <div class="form-column">
+              <label>Ubicación</label>
+              <select required>
+                <option selected disabled>Selecciona una ubicación</option>
+                <option>Planta Baja</option>
+                <option>Planta 1</option>
+                <option>Planta 2</option>
+              </select>
+
+              <label>Número de Teléfono (Opcional)</label>
+              <input type="tel" required />
+
+              <label>Fecha Límite</label>
+              <input type="date" required />
+            </div>
+
+            <div class="form-column">
+              <label>Prioridad</label>
+
+              <div class="priority-stars">
+                <input type="radio" id="star3" name="priority" value="3" />
+                <label for="star3" class="star">★</label>
+
+                <input type="radio" id="star2" name="priority" value="2" />
+                <label for="star2" class="star">★</label>
+
+                <input
+                  type="radio"
+                  id="star1"
+                  name="priority"
+                  value="1"
+                  required
+                />
+                <label for="star1" class="star">★</label>
+              </div>
+              <label>Fecha de Creación</label>
+              <input type="text" id="fechaCreacion" readonly />
+              <label>Numero de ticket</label>
+              <input type="text" id="ticketID" readonly />
+            </div>
+          </div>
+
+          <!-- ZONA INFERIOR: DESCRIPCIÓN A PANTALLA COMPLETA -->
+          <div class="description-section">
+            <label>Descripción del problema</label>
+            <textarea rows="10" required></textarea>
+          </div>
+        </form>
+        <button class="btn-save" onclick="kanban()">Guardar Ticket</button>
+        <button class="btn-send" onclick="kanban()">Enviar Ticket</button>
+      </div>
+
+      <!-- Panel lateral derecho -->
+      <div class="ticket-side-panel">
+        <h3>Actividad del Ticket</h3>
+
+        <div class="activity-log" id="activityLog">
+          <!-- Mensajes de actividad -->
+          <div class="log-entry">
+            <span class="log-time">10:24 AM</span>
+            <p class="log-text">El ticket fue creado por el usuario.</p>
+          </div>
+
+          <div class="log-entry">
+            <span class="log-time">10:30 AM</span>
+            <p class="log-text">Asignado al Ing. López.</p>
+          </div>
+
+          <div class="log-entry engineer">
+            <span class="log-time">10:35 AM</span>
+            <p class="log-text">Estoy revisando el problema.</p>
+          </div>
+        </div>
+
+        <!-- Chat -->
+        <div class="chat-box">
+          <input
+            type="text"
+            id="chatMessage"
+            placeholder="Escribe un mensaje..."
+          />
+          <button onclick="sendMessage()">Enviar</button>
+        </div>
+      </div>
+      <script>
+        function kanban() {
+          window.location.href = "/kanban"; // o la pantalla que quieras
+        }
+      </script>
+
+      {% endblock %}
+    </div>
+  </body>
+</html>

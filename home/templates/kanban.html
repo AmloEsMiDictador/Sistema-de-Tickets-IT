@@ -1,0 +1,207 @@
+{% extends 'sideBar.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/kanban.css' %}" />
+  </head>
+  <body>
+    <div class="kanban-container">
+      <h2 class="kanban-title">Tickets</h2>
+
+      <div class="kanban-board">
+        <!-- Nuevo -->
+        <div class="kanban-column">
+          <h3>Nuevo</h3>
+
+          <!-- Prioridad alta -->
+          <div
+            class="kanban-card high"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Software functionality issue</p>
+            <div class="priority-stars" data-stars="3"></div>
+          </div>
+
+          <!-- Prioridad baja -->
+          <div
+            class="kanban-card low"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Login issue</p>
+            <div class="priority-stars" data-stars="1"></div>
+          </div>
+
+          <!-- Prioridad media -->
+          <div
+            class="kanban-card medium"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Network connectivity problem</p>
+            <div class="priority-stars" data-stars="2"></div>
+          </div>
+        </div>
+
+        <!-- Enviado -->
+        <div class="kanban-column">
+          <h3>Enviado</h3>
+
+          <div
+            class="kanban-card high"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Software functionality issue</p>
+            <div class="priority-stars" data-stars="3"></div>
+          </div>
+
+          <div
+            class="kanban-card low"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Login issue</p>
+            <div class="priority-stars" data-stars="1"></div>
+          </div>
+
+          <div
+            class="kanban-card medium"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Network connectivity problem</p>
+            <div class="priority-stars" data-stars="2"></div>
+          </div>
+        </div>
+
+        <!-- In Progress -->
+        <div class="kanban-column">
+          <h3>In progress</h3>
+
+          <div
+            class="kanban-card high"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Software functionality issue</p>
+            <div class="priority-stars" data-stars="3"></div>
+          </div>
+
+          <div
+            class="kanban-card low"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Login issue</p>
+            <div class="priority-stars" data-stars="1"></div>
+          </div>
+
+          <div
+            class="kanban-card medium"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Network connectivity problem</p>
+            <div class="priority-stars" data-stars="2"></div>
+          </div>
+        </div>
+
+        <!-- Done -->
+        <div class="kanban-column">
+          <h3>Done</h3>
+
+          <div
+            class="kanban-card high"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Software functionality issue</p>
+            <div class="priority-stars" data-stars="3"></div>
+          </div>
+
+          <div
+            class="kanban-card low"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Login issue</p>
+            <div class="priority-stars" data-stars="1"></div>
+          </div>
+
+          <div
+            class="kanban-card medium"
+            draggable="true"
+            onclick="openTicket()"
+            onmouseover="highlightCard(this)"
+            onmouseout="resetCard(this)"
+          >
+            <p class="ticket-title">Network connectivity problem</p>
+            <div class="priority-stars" data-stars="2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 🔹 Abrir la pantalla del ticket
+      function openTicket() {
+        window.location.href = "/tickets";
+      }
+
+      // 🔹 Mostrar una alerta temporal (ejemplo)
+      function showMessage(msg) {
+        alert(msg);
+      }
+
+      // 🔹 Funcion que cambia el color de un ticket al pasar el mouse
+      function highlightCard(card) {
+        card.style.backgroundColor = "#eef2ff";
+      }
+
+      // 🔹 Regresar el color original
+      function resetCard(card) {
+        card.style.backgroundColor = "";
+      }
+
+      // 🔹 Función futura para mover tickets (drag & drop)
+      function initDragSystem() {
+        console.log("Sistema de arrastre listo (cuando lo activemos)");
+      }
+
+      // 🔹 Inicializar funciones cuando la página cargue
+      document.addEventListener("DOMContentLoaded", () => {
+        initDragSystem();
+      });
+    </script>
+
+    {% endblock %}
+  </body>
+</html>
+function openTicket() { window.location.href = "tickets.html"; }
