@@ -1,207 +1,251 @@
 {% extends 'sideBar.html' %} {% load static %} {% block content %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/kanban.css' %}" />
+    <title>Kanban Tickets</title>
+    <link rel="stylesheet" href="{% static 'css/Tickets.css' %}" />
   </head>
   <body>
     <div class="kanban-container">
-      <h2 class="kanban-title">Tickets</h2>
+      <!-- NUEVO -->
+      <div class="kanban-column">
+        <div class="kanban-header">
+          <span class="dot blue"></span>
+          <h2>Nuevo <span class="count">8</span></h2>
+          <span class="menu">⋯</span>
+        </div>
 
-      <div class="kanban-board">
-        <!-- Nuevo -->
-        <div class="kanban-column">
-          <h3>Nuevo</h3>
+        <div
+          class="ticket-card"
+          onclick="openTicket()"
+          onmouseover="highlightCard(this)"
+          onmouseout="resetCard(this)"
+        >
+          <div class="ticket-id">#TK-2847</div>
+          <span class="badge normal">Normal</span>
 
-          <!-- Prioridad alta -->
-          <div
-            class="kanban-card high"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Software functionality issue</p>
-            <div class="priority-stars" data-stars="3"></div>
-          </div>
+          <h3>Error en módulo de pagos</h3>
+          <p>
+            El sistema no procesa correctamente los pagos con tarjeta de crédito
+          </p>
 
-          <!-- Prioridad baja -->
-          <div
-            class="kanban-card low"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Login issue</p>
-            <div class="priority-stars" data-stars="1"></div>
-          </div>
-
-          <!-- Prioridad media -->
-          <div
-            class="kanban-card medium"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Network connectivity problem</p>
-            <div class="priority-stars" data-stars="2"></div>
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>María López</span>
+            <span class="time">Hace 2h</span>
           </div>
         </div>
 
-        <!-- Enviado -->
-        <div class="kanban-column">
-          <h3>Enviado</h3>
+        <div class="ticket-card">
+          <div class="ticket-id">#TK-2846</div>
+          <span class="badge low">Baja</span>
 
-          <div
-            class="kanban-card high"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Software functionality issue</p>
-            <div class="priority-stars" data-stars="3"></div>
-          </div>
+          <h3>Actualizar información de contacto</h3>
+          <p>Necesito cambiar el email asociado a mi cuenta</p>
 
-          <div
-            class="kanban-card low"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Login issue</p>
-            <div class="priority-stars" data-stars="1"></div>
-          </div>
-
-          <div
-            class="kanban-card medium"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Network connectivity problem</p>
-            <div class="priority-stars" data-stars="2"></div>
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>Carlos Ruiz</span>
+            <span class="time">Hace 5h</span>
           </div>
         </div>
 
-        <!-- In Progress -->
-        <div class="kanban-column">
-          <h3>In progress</h3>
+        <div class="ticket-card">
+          <div class="ticket-id">#TK-2845</div>
+          <span class="badge high">Alta</span>
 
-          <div
-            class="kanban-card high"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Software functionality issue</p>
-            <div class="priority-stars" data-stars="3"></div>
+          <h3>Sistema no responde</h3>
+          <p>La aplicación se queda congelada al intentar cargar reportes</p>
+
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>Ana García</span>
+            <span class="time">Hace 1d</span>
           </div>
+        </div>
+      </div>
 
-          <div
-            class="kanban-card low"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Login issue</p>
-            <div class="priority-stars" data-stars="1"></div>
-          </div>
+      <!-- Enviado  -->
+      <div class="kanban-column">
+        <div class="kanban-header">
+          <span class="dot blue"></span>
+          <h2>Enviado <span class="count">8</span></h2>
+          <span class="menu">⋯</span>
+        </div>
 
-          <div
-            class="kanban-card medium"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Network connectivity problem</p>
-            <div class="priority-stars" data-stars="2"></div>
+        <div class="ticket-card">
+          <div class="ticket-id">#TK-2847</div>
+          <span class="badge normal">Normal</span>
+
+          <h3>Error en módulo de pagos</h3>
+          <p>
+            El sistema no procesa correctamente los pagos con tarjeta de crédito
+          </p>
+
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>María López</span>
+            <span class="time">Hace 2h</span>
           </div>
         </div>
 
-        <!-- Done -->
-        <div class="kanban-column">
-          <h3>Done</h3>
+        <div class="ticket-card">
+          <div class="ticket-id">#TK-2846</div>
+          <span class="badge low">Baja</span>
 
-          <div
-            class="kanban-card high"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Software functionality issue</p>
-            <div class="priority-stars" data-stars="3"></div>
+          <h3>Actualizar información de contacto</h3>
+          <p>Necesito cambiar el email asociado a mi cuenta</p>
+
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>Carlos Ruiz</span>
+            <span class="time">Hace 5h</span>
+          </div>
+        </div>
+
+        <div class="ticket-card">
+          <div class="ticket-id">#TK-2845</div>
+          <span class="badge high">Alta</span>
+
+          <h3>Sistema no responde</h3>
+          <p>La aplicación se queda congelada al intentar cargar reportes</p>
+
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>Ana García</span>
+            <span class="time">Hace 1d</span>
+          </div>
+        </div>
+      </div>
+      <!-- EN PROGRESO -->
+      <div class="kanban-column">
+        <div class="kanban-header">
+          <span class="dot purple"></span>
+          <h2>En Progreso <span class="count">5</span></h2>
+          <span class="menu">⋯</span>
+        </div>
+
+        <div class="ticket-card">
+          <div class="ticket-id">#TK-2844</div>
+          <span class="badge high">Alta</span>
+
+          <h3>Integración API externa</h3>
+          <p>
+            Configurar conexión con servicio de terceros para sincronización
+          </p>
+
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>Pedro Martínez</span>
+            <span class="time">Hace 3h</span>
           </div>
 
-          <div
-            class="kanban-card low"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Login issue</p>
-            <div class="priority-stars" data-stars="1"></div>
+          <div class="progress"></div>
+        </div>
+
+        <div class="ticket-card">
+          <div class="ticket-id">#TK-2843</div>
+          <span class="badge normal">Normal</span>
+
+          <h3>Optimizar base de datos</h3>
+          <p>Las consultas están tardando demasiado tiempo</p>
+
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>Laura Sánchez</span>
+            <span class="time">Hace 6h</span>
           </div>
 
-          <div
-            class="kanban-card medium"
-            draggable="true"
-            onclick="openTicket()"
-            onmouseover="highlightCard(this)"
-            onmouseout="resetCard(this)"
-          >
-            <p class="ticket-title">Network connectivity problem</p>
-            <div class="priority-stars" data-stars="2"></div>
+          <div class="progress small"></div>
+        </div>
+
+        <div class="ticket-card">
+          <div class="ticket-id">#TK-2841</div>
+          <span class="badge normal">Normal</span>
+
+          <h3>Diseño de nueva funcionalidad</h3>
+          <p>Crear mockups para módulo de notificaciones</p>
+
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>Jorge Díaz</span>
+            <span class="time">Hace 1d</span>
+          </div>
+
+          <div class="progress medium"></div>
+        </div>
+      </div>
+
+      <!-- Finalizado -->
+      <div class="kanban-column">
+        <div class="kanban-header">
+          <span class="dot gray"></span>
+          <h2>Finalizado <span class="count">3</span></h2>
+          <span class="menu">⋯</span>
+        </div>
+
+        <div class="ticket-card">
+          <div class="ticket-id">#TK-2840</div>
+          <span class="badge normal">Normal</span>
+
+          <h3>Actualización de seguridad</h3>
+          <p>Implementar parches de seguridad recomendados</p>
+
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>Roberto Vega</span>
+            <span class="time">Hace 4h</span>
+          </div>
+        </div>
+
+        <div class="ticket-card">
+          <div class="ticket-id">#TK-2838</div>
+          <span class="badge low">Baja</span>
+
+          <h3>Mejorar documentación</h3>
+          <p>Actualizar guía de usuario con nuevas funcionalidades</p>
+
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>Sofía Torres</span>
+            <span class="time">Hace 2d</span>
           </div>
         </div>
       </div>
     </div>
-
-    <script>
-      // 🔹 Abrir la pantalla del ticket
-      function openTicket() {
-        window.location.href = "/tickets";
-      }
-
-      // 🔹 Mostrar una alerta temporal (ejemplo)
-      function showMessage(msg) {
-        alert(msg);
-      }
-
-      // 🔹 Funcion que cambia el color de un ticket al pasar el mouse
-      function highlightCard(card) {
-        card.style.backgroundColor = "#eef2ff";
-      }
-
-      // 🔹 Regresar el color original
-      function resetCard(card) {
-        card.style.backgroundColor = "";
-      }
-
-      // 🔹 Función futura para mover tickets (drag & drop)
-      function initDragSystem() {
-        console.log("Sistema de arrastre listo (cuando lo activemos)");
-      }
-
-      // 🔹 Inicializar funciones cuando la página cargue
-      document.addEventListener("DOMContentLoaded", () => {
-        initDragSystem();
-      });
-    </script>
-
-    {% endblock %}
   </body>
+  <script>
+    // 🔹 Abrir la pantalla del ticket
+    function openTicket() {
+      window.location.href = "/tickets";
+    }
+
+    // 🔹 Mostrar una alerta temporal (ejemplo)
+    function showMessage(msg) {
+      alert(msg);
+    }
+
+    // 🔹 Funcion que cambia el color de un ticket al pasar el mouse
+    function highlightCard(card) {
+      card.style.backgroundColor = "#eef2ff";
+    }
+
+    // 🔹 Regresar el color original
+    function resetCard(card) {
+      card.style.backgroundColor = "";
+    }
+
+    // 🔹 Función futura para mover tickets (drag & drop)
+    function initDragSystem() {
+      console.log("Sistema de arrastre listo (cuando lo activemos)");
+    }
+
+    // 🔹 Inicializar funciones cuando la página cargue
+    document.addEventListener("DOMContentLoaded", () => {
+      initDragSystem();
+    });
+  </script>
+  {% endblock %}
 </html>
-function openTicket() { window.location.href = "tickets.html"; }
