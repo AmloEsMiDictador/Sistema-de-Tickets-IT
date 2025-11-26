@@ -24,4 +24,8 @@ urlpatterns = [
     path('sideBar/', views.sideBar, name='sideBar'),
     path('tickets/', views.tickets, name='tickets'),
     path('kanban/', views.kanban, name='kanban'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('users/', views.users, name='users'),
+    path('settings/', views.settings, name='settings'),
+    
 ]

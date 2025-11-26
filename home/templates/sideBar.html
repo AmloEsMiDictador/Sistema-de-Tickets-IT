@@ -5,29 +5,104 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema de Tickets</title>
-    <link rel="stylesheet" href="{% static 'css/sideBar.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/SideBar.css' %}" />
   </head>
   <body>
     <div class="layout">
-      <!-- Sidebar -->
       <aside class="sidebar">
+        <div class="sidebar-header">
+          <img
+            class="logo-icon"
+            src="{% static 'img/tickets.png' %}"
+            alt="Logo IT Support"
+          />
+          <div>
+            <div class="system-title">IT Support</div>
+            <div class="system-subtitle">Ticket System</div>
+          </div>
+        </div>
+
         <div class="sidebar-menu">
-          <div class="menu-icon active"></div>
-          <div class="menu-icon"></div>
-          <div class="menu-icon"></div>
-          <div class="menu-icon"></div>
-          <div class="menu-icon"></div>
+          <a href="{% url 'dashboard' %}" class="menu-item active">
+            <img
+              class="menu-icon"
+              src="{% static 'img/analisis.png' %}"
+              alt="Dashboard Icon"
+            />
+            <span>Dashboard</span>
+          </a>
+
+          <a href="{% url 'kanban' %}" class="menu-item">
+            <img
+              class="menu-icon"
+              src="{% static 'img/tickets.png' %}"
+              alt="Tickets Icon"
+            />
+            <span>Tickets</span>
+          </a>
+
+          <a href="{% url 'users' %}" class="menu-item">
+            <img
+              class="menu-icon"
+              src="{% static 'img/usuarios.png' %}"
+              alt="Usuarios Icon"
+            />
+            <span>Usuarios</span>
+          </a>
+
+          <a href="{% url 'tickets' %}" class="menu-item">
+            <img
+              class="menu-icon"
+              src="{% static 'img/categorias.png' %}"
+              alt="Categorías Icon"
+            />
+            <span>Categorías</span>
+          </a>
+
+          <a href="{% url 'tickets' %}" class="menu-item">
+            <img
+              class="menu-icon"
+              src="{% static 'img/reportes.png' %}"
+              alt="Reportes Icon"
+            />
+            <span>Reportes</span>
+          </a>
+
+          <a href="{% url 'settings' %}" class="menu-item">
+            <img
+              class="menu-icon"
+              src="{% static 'img/configuracion.png' %}"
+              alt="Configuración Icon"
+            />
+            <span>Configuración</span>
+          </a>
+        </div>
+
+        <div class="user-profile-footer">
+          <div class="user-info">
+            <img
+              class="user-avatar"
+              src="{% static 'img/carlos_mendez.png' %}"
+              alt="Avatar de Carlos Méndez"
+            />
+            <div class="user-text">
+              <div class="user-name">Carlos Méndez</div>
+              <div class="user-role">Admin IT</div>
+            </div>
+          </div>
+          <span class="more-options-icon">...</span>
         </div>
       </aside>
-        {% block content %}
-        {% endblock %}
-        <!--Tickets KANBAN -->
-        
-        </div>
-      </div>
+
+      <div class="main-content">{% block content %} {% endblock %}</div>
     </div>
   </body>
 </html>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".kanban-card");

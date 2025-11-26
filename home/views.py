@@ -12,3 +12,15 @@ def tickets(request):
 
 def kanban(request):
     return render(request, "kanban.html")
+
+def dashboard(request):
+    return render(request, "dashboard.html")
+
+def users(request):
+    return render(request, "users.html")
+
+def settings(request):
+    return render(request, "settings.html")
+
+def help(request):
+    return render(request, "help.html")

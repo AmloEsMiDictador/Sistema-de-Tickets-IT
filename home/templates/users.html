@@ -1,0 +1,219 @@
+{% extends 'sideBar.html' %} {% load static %} {% block content %}
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Usuarios - Maqueta</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/users.css' %}" />
+  </head>
+  <body>
+    <div class="user-management-dashboard">
+      <header class="dashboard-header">
+        <div class="header-text">
+          <h1>Users Management</h1>
+          <p>Manage your team members and their roles</p>
+        </div>
+        <div class="header-actions">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search users..." />
+          </div>
+          <button class="add-user-btn">
+            <i class="fa-solid fa-plus"></i>
+            Add User
+          </button>
+        </div>
+      </header>
+
+      <div class="stat-cards-container">
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-value">247</span>
+            <span class="stat-label">Total Users</span>
+          </div>
+          <div class="stat-icon bg-blue">
+            <i class="fa-solid fa-users"></i>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-value">189</span>
+            <span class="stat-label">Active Users</span>
+          </div>
+          <div class="stat-icon bg-green">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-value">12</span>
+            <span class="stat-label">Departments</span>
+          </div>
+          <div class="stat-icon bg-orange">
+            <i class="fa-solid fa-building"></i>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-value">23</span>
+            <span class="stat-label">New This Month</span>
+          </div>
+          <div class="stat-icon bg-purple">
+            <i class="fa-solid fa-user-plus"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn">
+          All Departments <i class="fa-solid fa-angle-down"></i>
+        </button>
+        <button class="filter-btn">
+          All Positions <i class="fa-solid fa-angle-down"></i>
+        </button>
+        <button class="filter-btn">
+          All Status <i class="fa-solid fa-angle-down"></i>
+        </button>
+        <button class="clear-filters-btn">Clear Filters</button>
+      </div>
+
+      <div class="users-table-container">
+        <div class="table-header">
+          <span>USER</span>
+          <span>DEPARTMENT</span>
+          <span>POSITION</span>
+          <span>STATUS</span>
+          <span>JOIN DATE</span>
+          <span>ACTIONS</span>
+        </div>
+
+        <div class="table-row">
+          <div class="user-cell">
+            <div
+              class="user-avatar"
+              style="background-image: url('placeholder_avatar_1.jpg')"
+            ></div>
+            <div class="user-details">
+              <div class="user-name">Sarah Johnson</div>
+              <div class="user-email">sarah.johnson@company.com</div>
+            </div>
+          </div>
+          <span>Engineering</span>
+          <span>Senior Developer</span>
+          <span class="status-badge status-active">Active</span>
+          <span>Jan 15, 2023</span>
+          <div class="actions-cell">
+            <i class="fa-solid fa-pencil"></i>
+            <i class="fa-solid fa-trash-can"></i>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="user-cell">
+            <div
+              class="user-avatar"
+              style="background-image: url('placeholder_avatar_2.jpg')"
+            ></div>
+            <div class="user-details">
+              <div class="user-name">Michael Chen</div>
+              <div class="user-email">michael.chen@company.com</div>
+            </div>
+          </div>
+          <span>Marketing</span>
+          <span>Marketing Manager</span>
+          <span class="status-badge status-active">Active</span>
+          <span>Mar 22, 2023</span>
+          <div class="actions-cell">
+            <i class="fa-solid fa-pencil"></i>
+            <i class="fa-solid fa-trash-can"></i>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="user-cell">
+            <div
+              class="user-avatar"
+              style="background-image: url('placeholder_avatar_3.jpg')"
+            ></div>
+            <div class="user-details">
+              <div class="user-name">Emma Rodriguez</div>
+              <div class="user-email">emma.rodriguez@company.com</div>
+            </div>
+          </div>
+          <span>Sales</span>
+          <span>Sales Representative</span>
+          <span class="status-badge status-pending">Pending</span>
+          <span>Dec 05, 2024</span>
+          <div class="actions-cell">
+            <i class="fa-solid fa-pencil"></i>
+            <i class="fa-solid fa-trash-can"></i>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="user-cell">
+            <div
+              class="user-avatar"
+              style="background-image: url('placeholder_avatar_4.jpg')"
+            ></div>
+            <div class="user-details">
+              <div class="user-name">David Wilson</div>
+              <div class="user-email">david.wilson@company.com</div>
+            </div>
+          </div>
+          <span>HR</span>
+          <span>HR Specialist</span>
+          <span class="status-badge status-active">Active</span>
+          <span>Aug 10, 2022</span>
+          <div class="actions-cell">
+            <i class="fa-solid fa-pencil"></i>
+            <i class="fa-solid fa-trash-can"></i>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="user-cell">
+            <div
+              class="user-avatar"
+              style="background-image: url('placeholder_avatar_5.jpg')"
+            ></div>
+            <div class="user-details">
+              <div class="user-name">Lisa Anderson</div>
+              <div class="user-email">lisa.anderson@company.com</div>
+            </div>
+          </div>
+          <span>Engineering</span>
+          <span>Junior Developer</span>
+          <span class="status-badge status-inactive">Inactive</span>
+          <span>Nov 03, 2024</span>
+          <div class="actions-cell">
+            <i class="fa-solid fa-pencil"></i>
+            <i class="fa-solid fa-trash-can"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination-footer">
+        <span class="results-info">Showing 1 to 5 of 247 results</span>
+        <div class="pagination-controls">
+          <button class="page-nav disabled">Previous</button>
+          <button class="page-number active">1</button>
+          <button class="page-number">2</button>
+          <button class="page-number">3</button>
+          <button class="page-nav">Next</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  {% endblock %}
+</html>
