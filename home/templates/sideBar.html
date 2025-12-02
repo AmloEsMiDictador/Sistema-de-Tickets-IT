@@ -94,44 +94,65 @@
               <div class="user-role">Admin IT</div>
             </div>
           </div>
-          <span class="more-options-icon">...</span>
+         
+
+          <!-- Menú de opciones (logout) -->
+          <div class="user-dropdown" id="userDropdown">
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+          </div>
         </div>
       </aside>
 
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const cards = document.querySelectorAll(".kanban-card");
+          const columns = document.querySelectorAll(".kanban-column");
+
+          let draggedCard = null;
+
+          cards.forEach((card) => {
+            card.addEventListener("dragstart", () => {
+              draggedCard = card;
+              card.classList.add("dragging");
+            });
+
+            card.addEventListener("dragend", () => {
+              draggedCard.classList.remove("dragging");
+              draggedCard = null;
+            });
+          });
+
+          columns.forEach((column) => {
+            column.addEventListener("dragover", (e) => {
+              e.preventDefault();
+            });
+
+            column.addEventListener("drop", () => {
+              if (draggedCard) {
+                column.appendChild(draggedCard);
+              }
+            });
+          });
+        });
+        const toggleMenu = document.getElementById("toggleMenu");
+        const userDropdown = document.getElementById("userDropdown");
+
+        toggleMenu.addEventListener("click", () => {
+          userDropdown.style.display =
+            userDropdown.style.display === "block" ? "none" : "block";
+        });
+
+        // Cerrar el menú si hace clic fuera
+        document.addEventListener("click", (e) => {
+          if (
+            !toggleMenu.contains(e.target) &&
+            !userDropdown.contains(e.target)
+          ) {
+            userDropdown.style.display = "none";
+          }
+        });
+      </script>
       <div class="main-content">{% block content %} {% endblock %}</div>
     </div>
   </body>
 </html>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".kanban-card");
-    const columns = document.querySelectorAll(".kanban-column");
-
-    let draggedCard = null;
-
-    cards.forEach((card) => {
-      card.addEventListener("dragstart", () => {
-        draggedCard = card;
-        card.classList.add("dragging");
-      });
-
-      card.addEventListener("dragend", () => {
-        draggedCard.classList.remove("dragging");
-        draggedCard = null;
-      });
-    });
-
-    columns.forEach((column) => {
-      column.addEventListener("dragover", (e) => {
-        e.preventDefault();
-      });
-
-      column.addEventListener("drop", () => {
-        if (draggedCard) {
-          column.appendChild(draggedCard);
-        }
-      });
-    });
-  });
-</script>

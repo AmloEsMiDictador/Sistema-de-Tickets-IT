@@ -1,330 +1,567 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nuevo Ticket - Formulario</title>
     <!-- Incluye Tailwind CSS para el diseño y la responsividad -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Configuración de color principal para simular el tema */
-        :root {
-            --color-primary: #4f46e5; /* Indigo para acciones */
-            --color-secondary: #f3f4f6; /* Gris claro de fondo */
-            --color-accent: #6b7280; /* Gris para textos secundarios */
-        }
+      /* Configuración de color principal para simular el tema */
+      :root {
+        --color-primary: #4f46e5; /* Indigo para acciones */
+        --color-secondary: #f3f4f6; /* Gris claro de fondo */
+        --color-accent: #6b7280; /* Gris para textos secundarios */
+      }
 
-        /* Aplicar la fuente Inter por defecto */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--color-secondary);
-        }
+      /* Aplicar la fuente Inter por defecto */
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--color-secondary);
+      }
 
-        /* Estilo para el drag and drop area */
-        .drag-drop-area {
-            border: 2px dashed #9ca3af;
-            background-color: #f9fafb;
-            min-height: 150px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            cursor: pointer;
-            transition: border-color 0.3s;
-        }
-        .drag-drop-area:hover {
-            border-color: var(--color-primary);
-        }
+      /* Estilo para el drag and drop area */
+      .drag-drop-area {
+        border: 2px dashed #9ca3af;
+        background-color: #f9fafb;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.3s;
+      }
+      .drag-drop-area:hover {
+        border-color: var(--color-primary);
+      }
 
-        /* Estilo para la barra de scroll del historial, haciéndola más limpia */
-        .activity-scroll-area::-webkit-scrollbar {
-            width: 8px;
-        }
-        .activity-scroll-area::-webkit-scrollbar-thumb {
-            background-color: #cbd5e1; /* Gris claro */
-            border-radius: 4px;
-        }
-        .activity-scroll-area::-webkit-scrollbar-thumb:hover {
-            background-color: #94a3b8; /* Gris medio */
-        }
+      /* Estilo para la barra de scroll del historial, haciéndola más limpia */
+      .activity-scroll-area::-webkit-scrollbar {
+        width: 8px;
+      }
+      .activity-scroll-area::-webkit-scrollbar-thumb {
+        background-color: #cbd5e1; /* Gris claro */
+        border-radius: 4px;
+      }
+      .activity-scroll-area::-webkit-scrollbar-thumb:hover {
+        background-color: #94a3b8; /* Gris medio */
+      }
     </style>
-</head>
-<body class="bg-gray-100 min-h-screen">
+  </head>
+  <body class="bg-gray-100 min-h-screen">
     <div class="max-w-7xl mx-auto bg-white shadow-lg">
+      <!-- Barra Superior / Header del Formulario -->
+      <header
+        class="flex items-center justify-between p-4 border-b border-gray-200 sticky top-0 bg-white z-20"
+      >
+        <div class="flex items-center">
+          <a href="#" class="text-gray-500 hover:text-gray-800 mr-4">
+            <!-- Icono de flecha hacia atrás (simulación de 'Atrás') -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+          </a>
+          <div>
+            <h1 class="text-xl font-semibold text-gray-800">Nuevo Ticket</h1>
+            <p class="text-sm text-gray-500">
+              Completa la información del ticket
+            </p>
+          </div>
+        </div>
+        <div class="space-x-2">
+          <button
+            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150"
+          >
+            Cancelar
+          </button>
+          <button
+            class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition duration-150"
+          >
+            Crear Ticket
+          </button>
+        </div>
+      </header>
 
-        <!-- Barra Superior / Header del Formulario -->
-        <header class="flex items-center justify-between p-4 border-b border-gray-200 sticky top-0 bg-white z-20">
-            <div class="flex items-center">
-                <a href="#" class="text-gray-500 hover:text-gray-800 mr-4">
-                    <!-- Icono de flecha hacia atrás (simulación de 'Atrás') -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                    </svg>
-                </a>
-                <div>
-                    <h1 class="text-xl font-semibold text-gray-800">Nuevo Ticket</h1>
-                    <p class="text-sm text-gray-500">Completa la información del ticket</p>
-                </div>
-            </div>
-            <div class="space-x-2">
-                <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150">
-                    Cancelar
-                </button>
-                <button class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition duration-150">
-                    Crear Ticket
-                </button>
-            </div>
-        </header>
-
-        <!-- Contenido Principal del Formulario y Conversación -->
-        <main class="p-6 md:p-10">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                
-                <!-- Columna Izquierda: Formulario de Creación (2/3 de ancho en lg) -->
-                <div class="lg:col-span-2 space-y-8">
-                    <form action="#" method="POST" class="space-y-8">
-
-                        <!-- 1. Sección: Información del Ticket -->
-                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-1">Información del Ticket</h2>
-                            <p class="text-sm text-gray-500 mb-6">Los campos marcados con * son obligatorios</p>
-
-                            <!-- Título del Ticket -->
-                            <div class="mb-6">
-                                <label for="titulo" class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500">Título del Ticket</label>
-                                <input type="text" id="titulo" name="titulo" placeholder="Ej: Problema con el inicio de sesión"
-                                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
-                            </div>
-
-                            <!-- Cliente y Prioridad (en la misma fila) -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                <!-- Cliente -->
-                                <div>
-                                    <label for="cliente" class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500">Cliente</label>
-                                    <select id="cliente" name="cliente"
-                                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white" required>
-                                        <option>Tech Solutions SA</option>
-                                        <option>Innovación Global SL</option>
-                                        <option>Servicios Alfa</option>
-                                    </select>
-                                </div>
-                                <!-- Prioridad -->
-                                <div>
-                                    <label for="prioridad" class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500">Prioridad</label>
-                                    <select id="prioridad" name="prioridad"
-                                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white" required>
-                                        <option>Urgente</option>
-                                        <option>Alta</option>
-                                        <option>Media</option>
-                                        <option>Baja</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Categoría y Asignado a (en la misma fila) -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                <!-- Categoría -->
-                                <div>
-                                    <label for="categoria" class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500">Categoría</label>
-                                    <select id="categoria" name="categoria"
-                                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white" required>
-                                        <option>Soporte Técnico</option>
-                                        <option>Fallas de Hardware</option>
-                                        <option>Consultoría de Software</option>
-                                    </select>
-                                </div>
-                                <!-- Asignado a -->
-                                <div>
-                                    <label for="asignar" class="block text-sm font-medium text-gray-700">Asignado a</label>
-                                    <select id="asignar" name="asignar"
-                                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white">
-                                        <option>Sin asignar</option>
-                                        <option>Agente A</option>
-                                        <option>Agente B</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Descripción -->
-                            <div>
-                                <label for="descripcion" class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500">Descripción</label>
-                                <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe el problema o solicitud en detalle..."
-                                          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required></textarea>
-                                <p class="mt-1 text-xs text-gray-500">Mínimo 20 caracteres</p>
-                            </div>
-                        </div>
-
-                        <!-- 2. Sección: Contacto, Archivos, Etiquetas y Opciones Adicionales (Continuación) -->
-                        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-
-                            <!-- Email y Teléfono (en la misma fila) -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                                <!-- Email de Contacto -->
-                                <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500">Email de Contacto</label>
-                                    <input type="email" id="email" name="email" value="contacto@ejemplo.com"
-                                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
-                                </div>
-                                <!-- Teléfono -->
-                                <div>
-                                    <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                                    <input type="tel" id="telefono" name="telefono" value="+52 55 1234 5678"
-                                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                                </div>
-                            </div>
-
-                            <!-- Archivos Adjuntos (Drag and Drop Area) -->
-                            <div class="mb-8">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Archivos Adjuntos</label>
-                                <div class="drag-drop-area rounded-lg">
-                                    <!-- Icono de Nube -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 014 4.903m-1.256 5.518L13 14.939V17h-2v-2.061l-5.644-2.518A7.001 7.001 0 0012 21a7.001 7.001 0 005.888-3.482z" />
-                                    </svg>
-                                    <p class="text-sm text-gray-500">Haz clic para subir o arrastra los archivos aquí</p>
-                                    <p class="text-xs text-gray-400">PNG, JPG, PDF hasta 10MB</p>
-                                    <input type="file" multiple class="hidden" id="file-upload">
-                                </div>
-                            </div>
-
-                            <!-- Etiquetas (Tags) -->
-                            <div class="mb-8">
-                                <label for="etiquetas" class="block text-sm font-medium text-gray-700 mb-2">Etiquetas</label>
-                                <div class="flex flex-wrap items-center p-2 border border-gray-300 rounded-lg shadow-sm focus-within:ring-blue-500 focus-within:border-blue-500">
-                                    <!-- Tags existentes (simulados) -->
-                                    <span class="inline-flex items-center px-3 py-1 mr-2 text-sm font-medium bg-gray-200 text-gray-700 rounded-full">
-                                        urgente
-                                        <button type="button" class="ml-1 text-gray-500 hover:text-gray-700">
-                                            &times;
-                                        </button>
-                                    </span>
-                                    <span class="inline-flex items-center px-3 py-1 mr-2 text-sm font-medium bg-gray-200 text-gray-700 rounded-full">
-                                        cliente-vip
-                                        <button type="button" class="ml-1 text-gray-500 hover:text-gray-700">
-                                            &times;
-                                        </button>
-                                    </span>
-                                    <!-- Campo de entrada para nuevas etiquetas -->
-                                    <input type="text" id="etiquetas" name="etiquetas" placeholder="Agregar etiqueta..."
-                                           class="flex-1 min-w-[150px] p-1 border-none focus:outline-none">
-                                </div>
-                            </div>
-
-                            <!-- Opciones Adicionales (Checkboxes) -->
-                            <div class="space-y-3 pt-4">
-                                <h3 class="text-base font-medium text-gray-800">Opciones Adicionales</h3>
-                                <div class="flex items-center">
-                                    <input id="notificacion" name="notificacion" type="checkbox" checked
-                                           class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                                    <label for="notificacion" class="ml-2 block text-sm text-gray-700">Enviar notificación por email al cliente</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input id="marcar-urgente" name="marcar-urgente" type="checkbox"
-                                           class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                                    <label for="marcar-urgente" class="ml-2 block text-sm text-gray-700">Marcar como urgente</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input id="crear-tarea" name="crear-tarea" type="checkbox" checked
-                                           class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-                                    <label for="crear-tarea" class="ml-2 block text-sm text-gray-700">Crear tarea de seguimiento</label>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                
-                <!-- Columna Derecha: Registro de Actividad (1/3 de ancho en lg) -->
-                <div class="lg:col-span-1">
-                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm lg:sticky lg:top-24">
-                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Registro de Actividad</h2>
-
-                        <!-- Timeline / Historial (altura fija con scroll) -->
-                        <div class="activity-scroll-area h-96 overflow-y-auto pr-2 space-y-5">
-                            <!-- Actividad 1: Creación del Ticket -->
-                            <div class="relative pl-5">
-                                <div class="absolute -left-2 top-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow"></div>
-                                <p class="text-xs text-gray-500">23 Nov, 00:01 AM</p>
-                                <p class="text-sm text-gray-800 font-medium">Ticket Creado por Cliente A.</p>
-                                <p class="text-xs text-gray-600 mt-1">Título: Problema con el inicio de sesión.</p>
-                                <div class="absolute left-0 top-2 h-full border-l-2 border-gray-200"></div>
-                            </div>
-
-                            <!-- Actividad 2: Asignación y Prioridad -->
-                            <div class="relative pl-5">
-                                <div class="absolute -left-2 top-0 w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow"></div>
-                                <p class="text-xs text-gray-500">23 Nov, 00:03 AM</p>
-                                <p class="text-sm text-gray-800 font-medium">Asignado a Agente B.</p>
-                                <p class="text-xs text-gray-600 mt-1">Prioridad establecida en Urgente.</p>
-                                <div class="absolute left-0 top-2 h-full border-l-2 border-gray-200"></div>
-                            </div>
-                            
-                            <!-- Actividad 3: Comentario de Seguimiento -->
-                            <div class="relative pl-5">
-                                <div class="absolute -left-2 top-0 w-4 h-4 bg-gray-400 rounded-full border-2 border-white shadow"></div>
-                                <p class="text-xs text-gray-500">23 Nov, 00:05 AM</p>
-                                <p class="text-sm text-gray-800 font-medium">Agente B ha añadido un comentario:</p>
-                                <div class="mt-2 p-3 bg-gray-50 rounded-lg text-xs text-gray-700 border border-gray-200">
-                                    "Solicito credenciales temporales para diagnóstico remoto. Esperando respuesta del cliente."
-                                </div>
-                                <div class="absolute left-0 top-2 h-full border-l-2 border-gray-200"></div>
-                            </div>
-                            
-                            <!-- Actividad 4: Cambio de Estado (Simulado) -->
-                            <div class="relative pl-5">
-                                <div class="absolute -left-2 top-0 w-4 h-4 bg-yellow-500 rounded-full border-2 border-white shadow"></div>
-                                <p class="text-xs text-gray-500">23 Nov, 00:10 AM</p>
-                                <p class="text-sm text-gray-800 font-medium">Estado cambiado a 'Pendiente de Cliente'.</p>
-                                <div class="absolute left-0 top-2 h-full border-l-2 border-gray-200"></div>
-                            </div>
-
-                            <!-- Final del timeline sin línea inferior -->
-                            <div class="relative pl-5">
-                                <div class="absolute -left-2 top-0 w-4 h-4 bg-indigo-500 rounded-full border-2 border-white shadow"></div>
-                                <p class="text-xs text-gray-500">Ahora</p>
-                                <p class="text-sm text-gray-800 font-medium">Visualizando formulario.</p>
-                            </div>
-
-                        </div>
-
-                        <!-- Sección de Nuevo Comentario / Enviar Actualización -->
-                        <div class="mt-6 pt-4 border-t border-gray-200">
-                            <h3 class="text-base font-medium text-gray-800 mb-2">Añadir Comentario</h3>
-                            <textarea rows="3" placeholder="Escribe una actualización o comentario..."
-                                      class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"></textarea>
-                            <button class="w-full mt-2 px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition duration-150">
-                                Enviar Actualización
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Footer y Botones de Acción Final (Se mantiene debajo de ambas columnas) -->
-            <footer class="mt-8 flex justify-between items-center pt-4 border-t border-gray-200">
-                <p class="text-xs text-gray-500 flex items-center">
-                    <!-- Icono de Información -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Todos los cambios se guardarán automáticamente
+      <!-- Contenido Principal del Formulario y Conversación -->
+      <main class="p-6 md:p-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Columna Izquierda: Formulario de Creación (2/3 de ancho en lg) -->
+          <div class="lg:col-span-2 space-y-8">
+            <form action="#" method="POST" class="space-y-8">
+              <!-- 1. Sección: Información del Ticket -->
+              <div
+                class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
+              >
+                <h2 class="text-lg font-semibold text-gray-800 mb-1">
+                  Información del Ticket
+                </h2>
+                <p class="text-sm text-gray-500 mb-6">
+                  Los campos marcados con * son obligatorios
                 </p>
-                <div class="space-x-3">
-                    <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150">
-                        Guardar Borrador
-                    </button>
-                    <button class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition duration-150 flex items-center">
-                        <!-- Icono de Check / Tilde -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        Crear Ticket
-                    </button>
-                </div>
-            </footer>
 
-        </main>
+                <!-- Título del Ticket -->
+                <div class="mb-6">
+                  <label
+                    for="titulo"
+                    class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                    >Título del Ticket</label
+                  >
+                  <input
+                    type="text"
+                    id="titulo"
+                    name="titulo"
+                    placeholder="Ej: Problema con el inicio de sesión"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  />
+                </div>
+
+                <!-- Cliente y Prioridad (en la misma fila) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <!-- Cliente -->
+                  <div>
+                    <label
+                      for="cliente"
+                      class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                      >Cliente</label
+                    >
+                    <select
+                      id="cliente"
+                      name="cliente"
+                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white"
+                      required
+                    >
+                      <option>Tech Solutions SA</option>
+                      <option>Innovación Global SL</option>
+                      <option>Servicios Alfa</option>
+                    </select>
+                  </div>
+                  <!-- Prioridad -->
+                  <div>
+                    <label
+                      for="prioridad"
+                      class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                      >Prioridad</label
+                    >
+                    <select
+                      id="prioridad"
+                      name="prioridad"
+                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white"
+                      required
+                    >
+                      <option>Urgente</option>
+                      <option>Alta</option>
+                      <option>Media</option>
+                      <option>Baja</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Categoría y Asignado a (en la misma fila) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <!-- Categoría -->
+                  <div>
+                    <label
+                      for="categoria"
+                      class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                      >Categoría</label
+                    >
+                    <select
+                      id="categoria"
+                      name="categoria"
+                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white"
+                      required
+                    >
+                      <option>Soporte Técnico</option>
+                      <option>Fallas de Hardware</option>
+                      <option>Consultoría de Software</option>
+                    </select>
+                  </div>
+                  <!-- Asignado a -->
+                  <div>
+                    <label
+                      for="asignar"
+                      class="block text-sm font-medium text-gray-700"
+                      >Asignado a</label
+                    >
+                    <select
+                      id="asignar"
+                      name="asignar"
+                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white"
+                    >
+                      <option>Sin asignar</option>
+                      <option>Agente A</option>
+                      <option>Agente B</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Descripción -->
+                <div>
+                  <label
+                    for="descripcion"
+                    class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                    >Descripción</label
+                  >
+                  <textarea
+                    id="descripcion"
+                    name="descripcion"
+                    rows="4"
+                    placeholder="Describe el problema o solicitud en detalle..."
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  ></textarea>
+                  <p class="mt-1 text-xs text-gray-500">Mínimo 20 caracteres</p>
+                </div>
+              </div>
+
+              <!-- 2. Sección: Contacto, Archivos, Etiquetas y Opciones Adicionales (Continuación) -->
+              <div
+                class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
+              >
+                <!-- Email y Teléfono (en la misma fila) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  <!-- Email de Contacto -->
+                  <div>
+                    <label
+                      for="email"
+                      class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
+                      >Email de Contacto</label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value="contacto@ejemplo.com"
+                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                  <!-- Teléfono -->
+                  <div>
+                    <label
+                      for="telefono"
+                      class="block text-sm font-medium text-gray-700"
+                      >Teléfono</label
+                    >
+                    <input
+                      type="tel"
+                      id="telefono"
+                      name="telefono"
+                      value="+52 55 1234 5678"
+                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+
+                <!-- Archivos Adjuntos (Drag and Drop Area) -->
+                <div class="mb-8">
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Archivos Adjuntos</label
+                  >
+                  <div class="drag-drop-area rounded-lg">
+                    <!-- Icono de Nube -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-10 w-10 text-gray-400 mb-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 014 4.903m-1.256 5.518L13 14.939V17h-2v-2.061l-5.644-2.518A7.001 7.001 0 0012 21a7.001 7.001 0 005.888-3.482z"
+                      />
+                    </svg>
+                    <p class="text-sm text-gray-500">
+                      Haz clic para subir o arrastra los archivos aquí
+                    </p>
+                    <p class="text-xs text-gray-400">
+                      PNG, JPG, PDF hasta 10MB
+                    </p>
+                    <input
+                      type="file"
+                      multiple
+                      class="hidden"
+                      id="file-upload"
+                    />
+                  </div>
+                </div>
+
+                <!-- Etiquetas (Tags) -->
+                <div class="mb-8">
+                  <label
+                    for="etiquetas"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >Etiquetas</label
+                  >
+                  <div
+                    class="flex flex-wrap items-center p-2 border border-gray-300 rounded-lg shadow-sm focus-within:ring-blue-500 focus-within:border-blue-500"
+                  >
+                    <!-- Tags existentes (simulados) -->
+                    <span
+                      class="inline-flex items-center px-3 py-1 mr-2 text-sm font-medium bg-gray-200 text-gray-700 rounded-full"
+                    >
+                      urgente
+                      <button
+                        type="button"
+                        class="ml-1 text-gray-500 hover:text-gray-700"
+                      >
+                        &times;
+                      </button>
+                    </span>
+                    <span
+                      class="inline-flex items-center px-3 py-1 mr-2 text-sm font-medium bg-gray-200 text-gray-700 rounded-full"
+                    >
+                      cliente-vip
+                      <button
+                        type="button"
+                        class="ml-1 text-gray-500 hover:text-gray-700"
+                      >
+                        &times;
+                      </button>
+                    </span>
+                    <!-- Campo de entrada para nuevas etiquetas -->
+                    <input
+                      type="text"
+                      id="etiquetas"
+                      name="etiquetas"
+                      placeholder="Agregar etiqueta..."
+                      class="flex-1 min-w-[150px] p-1 border-none focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <!-- Opciones Adicionales (Checkboxes) -->
+                <div class="space-y-3 pt-4">
+                  <h3 class="text-base font-medium text-gray-800">
+                    Opciones Adicionales
+                  </h3>
+                  <div class="flex items-center">
+                    <input
+                      id="notificacion"
+                      name="notificacion"
+                      type="checkbox"
+                      checked
+                      class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                    />
+                    <label
+                      for="notificacion"
+                      class="ml-2 block text-sm text-gray-700"
+                      >Enviar notificación por email al cliente</label
+                    >
+                  </div>
+                  <div class="flex items-center">
+                    <input
+                      id="marcar-urgente"
+                      name="marcar-urgente"
+                      type="checkbox"
+                      class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                    />
+                    <label
+                      for="marcar-urgente"
+                      class="ml-2 block text-sm text-gray-700"
+                      >Marcar como urgente</label
+                    >
+                  </div>
+                  <div class="flex items-center">
+                    <input
+                      id="crear-tarea"
+                      name="crear-tarea"
+                      type="checkbox"
+                      checked
+                      class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                    />
+                    <label
+                      for="crear-tarea"
+                      class="ml-2 block text-sm text-gray-700"
+                      >Crear tarea de seguimiento</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Columna Derecha: Registro de Actividad (1/3 de ancho en lg) -->
+          <div class="lg:col-span-1">
+            <div
+              class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm lg:sticky lg:top-24"
+            >
+              <h2 class="text-lg font-semibold text-gray-800 mb-4">
+                Registro de Actividad
+              </h2>
+
+              <!-- Timeline / Historial (altura fija con scroll) -->
+              <div
+                class="activity-scroll-area h-96 overflow-y-auto pr-2 space-y-5"
+              >
+                <!-- Actividad 1: Creación del Ticket -->
+                <div class="relative pl-5">
+                  <div
+                    class="absolute -left-2 top-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow"
+                  ></div>
+                  <p class="text-xs text-gray-500">23 Nov, 00:01 AM</p>
+                  <p class="text-sm text-gray-800 font-medium">
+                    Ticket Creado por Cliente A.
+                  </p>
+                  <p class="text-xs text-gray-600 mt-1">
+                    Título: Problema con el inicio de sesión.
+                  </p>
+                  <div
+                    class="absolute left-0 top-2 h-full border-l-2 border-gray-200"
+                  ></div>
+                </div>
+
+                <!-- Actividad 2: Asignación y Prioridad -->
+                <div class="relative pl-5">
+                  <div
+                    class="absolute -left-2 top-0 w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow"
+                  ></div>
+                  <p class="text-xs text-gray-500">23 Nov, 00:03 AM</p>
+                  <p class="text-sm text-gray-800 font-medium">
+                    Asignado a Agente B.
+                  </p>
+                  <p class="text-xs text-gray-600 mt-1">
+                    Prioridad establecida en Urgente.
+                  </p>
+                  <div
+                    class="absolute left-0 top-2 h-full border-l-2 border-gray-200"
+                  ></div>
+                </div>
+
+                <!-- Actividad 3: Comentario de Seguimiento -->
+                <div class="relative pl-5">
+                  <div
+                    class="absolute -left-2 top-0 w-4 h-4 bg-gray-400 rounded-full border-2 border-white shadow"
+                  ></div>
+                  <p class="text-xs text-gray-500">23 Nov, 00:05 AM</p>
+                  <p class="text-sm text-gray-800 font-medium">
+                    Agente B ha añadido un comentario:
+                  </p>
+                  <div
+                    class="mt-2 p-3 bg-gray-50 rounded-lg text-xs text-gray-700 border border-gray-200"
+                  >
+                    "Solicito credenciales temporales para diagnóstico remoto.
+                    Esperando respuesta del cliente."
+                  </div>
+                  <div
+                    class="absolute left-0 top-2 h-full border-l-2 border-gray-200"
+                  ></div>
+                </div>
+
+                <!-- Actividad 4: Cambio de Estado (Simulado) -->
+                <div class="relative pl-5">
+                  <div
+                    class="absolute -left-2 top-0 w-4 h-4 bg-yellow-500 rounded-full border-2 border-white shadow"
+                  ></div>
+                  <p class="text-xs text-gray-500">23 Nov, 00:10 AM</p>
+                  <p class="text-sm text-gray-800 font-medium">
+                    Estado cambiado a 'Pendiente de Cliente'.
+                  </p>
+                  <div
+                    class="absolute left-0 top-2 h-full border-l-2 border-gray-200"
+                  ></div>
+                </div>
+
+                <!-- Final del timeline sin línea inferior -->
+                <div class="relative pl-5">
+                  <div
+                    class="absolute -left-2 top-0 w-4 h-4 bg-indigo-500 rounded-full border-2 border-white shadow"
+                  ></div>
+                  <p class="text-xs text-gray-500">Ahora</p>
+                  <p class="text-sm text-gray-800 font-medium">
+                    Visualizando formulario.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Sección de Nuevo Comentario / Enviar Actualización -->
+              <div class="mt-6 pt-4 border-t border-gray-200">
+                <h3 class="text-base font-medium text-gray-800 mb-2">
+                  Añadir Comentario
+                </h3>
+                <textarea
+                  rows="3"
+                  placeholder="Escribe una actualización o comentario..."
+                  class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+                ></textarea>
+                <button
+                  class="w-full mt-2 px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition duration-150"
+                >
+                  Enviar Actualización
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer y Botones de Acción Final (Se mantiene debajo de ambas columnas) -->
+        <footer
+          class="mt-8 flex justify-between items-center pt-4 border-t border-gray-200"
+        >
+          <p class="text-xs text-gray-500 flex items-center">
+            <!-- Icono de Información -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 mr-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            Todos los cambios se guardarán automáticamente
+          </p>
+          <div class="space-x-3">
+            <button
+              class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150"
+            >
+              Guardar Borrador
+            </button>
+            <button
+              class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition duration-150 flex items-center"
+            >
+              <!-- Icono de Check / Tilde -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 mr-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              Crear Ticket
+            </button>
+          </div>
+        </footer>
+      </main>
     </div>
-</body>
+  </body>
 </html>

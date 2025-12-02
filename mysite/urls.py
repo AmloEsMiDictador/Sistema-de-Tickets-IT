@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from home import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +28,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('users/', views.users, name='users'),
     path('settings/', views.settings, name='settings'),
-    
+    path('logout/', views.logout_user, name='logout'),
 ]
