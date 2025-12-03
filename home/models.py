@@ -74,27 +74,79 @@ class EstatusTicket(models.Model):
 # =========================================================
 # Ticket
 # =========================================================
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
+# =========================================================
+# Ticket (¡ESTE FALTABA!)
+# =========================================================
+# home/models.py
+
+from django.db import models
 class Ticket(models.Model):
+
+    # Opciones de prioridad
     PRIORIDADES = [
         (1, 'Baja'),
         (2, 'Media'),
         (3, 'Alta'),
     ]
 
+    # Ubicaciones disponibles
+    UBICACIONES = [
+        ('Flute Automation', 'Flute Automation'),
+        ('Flute Machining', 'Flute Machining'),
+    ]
+
+    # Estatus del ticket
+    ESTATUS = [
+        ('Nuevo', 'Nuevo'),
+        ('En progreso', 'En progreso'),
+        ('Completado', 'Completado'),
+    ]
+
+    # Asignados disponibles (nombres aleatorios)
+    ASIGNADOS = [
+        ('Juan Perez', 'Juan Perez'),
+        ('Maria Lopez', 'Maria Lopez'),
+        ('Carlos Diaz', 'Carlos Diaz'),
+    ]
+
     titulo = models.CharField(max_length=200)
     descripcion = models.TextField()
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
 
-    solicitante = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='tickets_solicitados')
-    asignado = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, blank=True, related_name='tickets_asignados')
+    solicitante = models.CharField(max_length=100)   # quien crea el ticket
+
+    asignado = models.CharField(
+        max_length=100,
+        choices=ASIGNADOS,
+        blank=True,
+        null=True
+    )
 
     prioridad = models.IntegerField(choices=PRIORIDADES, default=2)
-    fecha_limite = models.DateField(null=True, blank=True)
 
-    ubicacion = models.CharField(max_length=200, blank=True)
     telefono_contacto = models.CharField(max_length=30, blank=True)
 
-    estatus = models.ForeignKey(EstatusTicket, on_delete=models.SET_NULL, null=True, blank=True)
+    fecha_limite = models.DateField(null=True, blank=True)
+
+    ubicacion = models.CharField(max_length=50, choices=UBICACIONES)
+
+    estatus = models.CharField(
+        max_length=20,
+        choices=ESTATUS,
+        default='Nuevo'
+    )
+
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.titulo} ({self.get_prioridad_display()})"
+    
+class TicketLog(models.Model):
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="logs")
+    mensaje = models.TextField()
+    fecha = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Log de Ticket #{self.ticket.id} - {self.fecha}"

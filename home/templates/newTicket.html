@@ -3,24 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nuevo Ticket - Formulario</title>
-    <!-- Incluye Tailwind CSS para el diseño y la responsividad -->
+    <title>Crear Nuevo Ticket</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-      /* Configuración de color principal para simular el tema */
       :root {
-        --color-primary: #1e40af; /* Azul oscuro */
-        --color-secondary: #f3f4f6; /* Gris claro de fondo */
-        --color-accent: #6b7280; /* Gris para textos secundarios */
+        --color-primary: #1e40af;
+        --color-secondary: #f3f4f6;
       }
 
-      /* Aplicar la fuente Inter por defecto */
       body {
         font-family: "Inter", sans-serif;
         background-color: var(--color-secondary);
       }
 
-      /* Estilo para el drag and drop area */
       .drag-drop-area {
         border: 2px dashed #9ca3af;
         background-color: #f9fafb;
@@ -29,24 +25,25 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        text-align: center;
         cursor: pointer;
         transition: border-color 0.3s;
       }
+
       .drag-drop-area:hover {
         border-color: var(--color-primary);
       }
     </style>
   </head>
+
   <body class="bg-gray-100 min-h-screen">
     <div class="max-w-7xl mx-auto bg-white shadow-lg">
-      <!-- Barra Superior / Header del Formulario -->
+      <!-- HEADER -->
       <header
-        class="flex items-center justify-between p-4 border-b border-gray-200 sticky top-0 bg-white z-10"
+        class="flex items-center justify-between p-4 border-b border-gray-200 bg-white sticky top-0 z-10"
       >
         <div class="flex items-center">
-          <a href="#" class="text-gray-500 hover:text-gray-800 mr-4">
-            <!-- Icono de flecha hacia atrás (simulación de 'Atrás') -->
+          <a href="/kanban" class="text-gray-500 hover:text-gray-800 mr-3">
+            <!-- Icono regresar -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6"
@@ -63,87 +60,83 @@
             </svg>
           </a>
           <div>
-            <h1 class="text-xl font-semibold text-gray-800">Nuevo Ticket</h1>
+            <h1 class="text-xl font-semibold text-gray-800">
+              Crear Nuevo Ticket
+            </h1>
             <p class="text-sm text-gray-500">
-              Completa la información del ticket
+              Completa la información requerida del ticket
             </p>
           </div>
         </div>
+
         <div class="space-x-2">
-          <button
-            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150"
+          <a
+            href="/kanban"
+            class="px-4 py-2 text-sm font-medium bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+            >Cancelar</a
           >
-            Cancelar
-          </button>
           <button
-            class="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition duration-150"
+            form="formTicket"
+            class="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800"
           >
             Crear Ticket
           </button>
         </div>
       </header>
 
-      <!-- Contenido Principal del Formulario -->
+      <!-- FORMULARIO -->
       <main class="p-6 md:p-10">
-        <form action="#" method="POST" class="space-y-8">
-          <!-- 1. Sección: Información del Ticket -->
+        <form
+          id="formTicket"
+          action="/ticket/crear"
+          method="POST"
+          enctype="multipart/form-data"
+          class="space-y-8"
+        >
+          <!-- 1. Información del ticket -->
           <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-            <h2 class="text-lg font-semibold text-gray-800 mb-1">
+            <h2 class="text-lg font-semibold text-gray-800 mb-2">
               Información del Ticket
             </h2>
-            <p class="text-sm text-gray-500 mb-6">
-              Los campos marcados con * son obligatorios
-            </p>
 
-            <!-- Título del Ticket -->
-            <div class="mb-6">
-              <label
-                for="titulo"
-                class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
-                >Título del Ticket</label
-              >
+            <!-- Título -->
+            <div class="mb-5">
+              <label class="text-sm font-medium text-gray-700">Título *</label>
               <input
                 type="text"
-                id="titulo"
                 name="titulo"
-                placeholder="Ej: Problema con el inicio de sesión"
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 required
+                minlength="5"
+                placeholder="Ej: Problema con el inicio de sesión"
+                class="mt-1 w-full px-3 py-2 border rounded-lg focus:ring-blue-500"
               />
             </div>
 
-            <!-- Cliente y Prioridad (en la misma fila) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <!-- Cliente -->
+            <!-- Cliente + Prioridad -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5">
               <div>
-                <label
-                  for="cliente"
-                  class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
-                  >Cliente</label
+                <label class="text-sm font-medium text-gray-700"
+                  >Cliente *</label
                 >
                 <select
-                  id="cliente"
                   name="cliente"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white"
                   required
+                  class="mt-1 w-full px-3 py-2 border rounded-lg"
                 >
                   <option>Tech Solutions SA</option>
                   <option>Innovación Global SL</option>
                   <option>Servicios Alfa</option>
                 </select>
               </div>
-              <!-- Prioridad -->
+
               <div>
-                <label
-                  for="prioridad"
-                  class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
-                  >Prioridad</label
+                <label class="text-sm font-medium text-gray-700"
+                  >Prioridad *</label
                 >
                 <select
-                  id="prioridad"
                   name="prioridad"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white"
                   required
+                  class="mt-1 w-full px-3 py-2 border rounded-lg"
                 >
                   <option>Urgente</option>
                   <option>Alta</option>
@@ -153,111 +146,123 @@
               </div>
             </div>
 
-            <!-- Categoría y Asignado a (en la misma fila) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <!-- Categoría -->
+            <!-- Categoría + Asignado -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5">
               <div>
-                <label
-                  for="categoria"
-                  class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
-                  >Categoría</label
+                <label class="text-sm font-medium text-gray-700"
+                  >Categoría *</label
                 >
                 <select
-                  id="categoria"
                   name="categoria"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white"
                   required
+                  class="mt-1 w-full px-3 py-2 border rounded-lg"
                 >
                   <option>Soporte Técnico</option>
-                  <option>Fallas de Hardware</option>
-                  <option>Consultoría de Software</option>
+                  <option>Hardware</option>
+                  <option>Software</option>
                 </select>
               </div>
-              <!-- Asignado a -->
+
               <div>
-                <label
-                  for="asignar"
-                  class="block text-sm font-medium text-gray-700"
+                <label class="text-sm font-medium text-gray-700"
                   >Asignado a</label
                 >
                 <select
-                  id="asignar"
-                  name="asignar"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white"
+                  name="asignado"
+                  class="mt-1 w-full px-3 py-2 border rounded-lg"
                 >
                   <option>Sin asignar</option>
-                  <option>Agente A</option>
-                  <option>Agente B</option>
+                  <!-- Técnicos fijos -->
+                  <option value="Juan Pérez">Juan Pérez</option>
+                  <option value="María López">María López</option>
+                  <option value="Carlos Gómez">Carlos Gómez</option>
+                  <option value="Ana Torres">Ana Torres</option>
                 </select>
               </div>
+            </div>
+
+            <!-- Estado -->
+            <div class="mb-5">
+              <label class="text-sm font-medium text-gray-700">Estado *</label>
+              <select
+                name="estado"
+                required
+                class="mt-1 w-full px-3 py-2 border rounded-lg"
+              >
+                <option>Nuevo</option>
+                <option>En Progreso</option>
+                <option>En Espera</option>
+                <option>Completado</option>
+              </select>
             </div>
 
             <!-- Descripción -->
             <div>
-              <label
-                for="descripcion"
-                class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
-                >Descripción</label
+              <label class="text-sm font-medium text-gray-700"
+                >Descripción *</label
               >
               <textarea
-                id="descripcion"
                 name="descripcion"
                 rows="4"
-                placeholder="Describe el problema o solicitud en detalle..."
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 required
+                minlength="20"
+                placeholder="Describe el problema o solicitud..."
+                class="mt-1 w-full px-3 py-2 border rounded-lg focus:ring-blue-500"
               ></textarea>
-              <p class="mt-1 text-xs text-gray-500">Mínimo 20 caracteres</p>
+              <p class="text-xs text-gray-500">Mínimo 20 caracteres</p>
             </div>
           </div>
 
-          <!-- 2. Sección: Contacto, Archivos, Etiquetas y Opciones Adicionales (Continuación) -->
+          <!-- 2. Datos de contacto + etiquetas + fecha límite -->
           <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-            <!-- Email y Teléfono (en la misma fila) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <!-- Email de Contacto -->
+            <!-- Email + Teléfono -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
-                <label
-                  for="email"
-                  class="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-0.5 after:text-red-500"
-                  >Email de Contacto</label
-                >
+                <label class="text-sm font-medium text-gray-700">Email *</label>
                 <input
                   type="email"
-                  id="email"
                   name="email"
-                  value="contacto@ejemplo.com"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   required
+                  class="mt-1 w-full px-3 py-2 border rounded-lg"
                 />
               </div>
-              <!-- Teléfono -->
+
               <div>
-                <label
-                  for="telefono"
-                  class="block text-sm font-medium text-gray-700"
+                <label class="text-sm font-medium text-gray-700"
                   >Teléfono</label
                 >
                 <input
                   type="tel"
-                  id="telefono"
                   name="telefono"
-                  value="+52 55 1234 5678"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  class="mt-1 w-full px-3 py-2 border rounded-lg"
                 />
               </div>
             </div>
 
-            <!-- Archivos Adjuntos (Drag and Drop Area) -->
+            <!-- Fecha límite -->
+            <div class="mb-6">
+              <label class="text-sm font-medium text-gray-700"
+                >Fecha Límite</label
+              >
+              <input
+                type="date"
+                name="fecha_limite"
+                class="mt-1 w-full px-3 py-2 border rounded-lg"
+              />
+            </div>
+
+            <!-- Archivos -->
             <div class="mb-8">
-              <label class="block text-sm font-medium text-gray-700 mb-2"
+              <label class="text-sm font-medium text-gray-700 mb-2"
                 >Archivos Adjuntos</label
               >
-              <div class="drag-drop-area rounded-lg">
-                <!-- Icono de Nube -->
+              <div
+                class="drag-drop-area rounded-lg"
+                onclick="document.getElementById('file-upload').click();"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-10 w-10 text-gray-400 mb-2"
+                  class="h-10 w-10 text-gray-400 mb-3"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -270,64 +275,35 @@
                   />
                 </svg>
                 <p class="text-sm text-gray-500">
-                  Haz clic para subir o arrastra los archivos aquí
+                  Haz clic o arrastra archivos
                 </p>
-                <p class="text-xs text-gray-400">PNG, JPG, PDF hasta 10MB</p>
-                <input type="file" multiple class="hidden" id="file-upload" />
+                <p class="text-xs text-gray-400">PDF / JPG / PNG — Máx 10MB</p>
+                <input
+                  id="file-upload"
+                  name="archivos"
+                  type="file"
+                  multiple
+                  class="hidden"
+                />
               </div>
             </div>
           </div>
         </form>
 
-        <!-- Footer y Botones de Acción Final -->
+        <!-- FOOTER -->
         <footer
           class="mt-8 flex justify-between items-center pt-4 border-t border-gray-200"
         >
           <p class="text-xs text-gray-500 flex items-center">
-            <!-- Icono de Información -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4 mr-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            Todos los cambios se guardarán automáticamente
+            Los cambios se guardarán automáticamente
           </p>
-          <div class="space-x-3">
-            <button
-              class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-150"
-            >
-              Guardar Borrador
-            </button>
-            <button
-              class="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 transition duration-150 flex items-center"
-            >
-              <!-- Icono de Check / Tilde -->
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 mr-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-              Crear Ticket
-            </button>
-          </div>
+
+          <button
+            form="formTicket"
+            class="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 flex items-center"
+          >
+            Crear Ticket
+          </button>
         </footer>
       </main>
     </div>

@@ -29,4 +29,6 @@ urlpatterns = [
     path('users/', views.users, name='users'),
     path('settings/', views.settings, name='settings'),
     path('logout/', views.logout_user, name='logout'),
+    path('newTicket/', views.newTicket, name='newTicket'),
+    path("ticket/<int:id>/", views.ticket_detalle, name="ticket_detalle"),
 ]
