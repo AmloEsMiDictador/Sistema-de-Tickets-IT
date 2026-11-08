@@ -1,0 +1,165 @@
+/* GENERAL */
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f6fa;
+}
+
+/* CONTENEDOR GENERAL HORIZONTAL (las columnas van lado a lado) */
+.kanban-container {
+  display: flex;
+  flex-direction: row; /* <--- esto las pone una al lado de otra */
+  gap: 20px;
+  width: 100%;
+  overflow-x: auto; /* útil si hay muchas columnas */
+}
+
+/* CADA COLUMNA */
+.kanban-column {
+  width: 350px; /* <--- Ajusta el ancho de cada columna */
+  background: #eef0f5;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.kanban-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.kanban-header h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.menu {
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+/* Tarjetas */
+.ticket-card {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.ticket-id {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Badges */
+.badge {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: white;
+  font-weight: bold;
+}
+
+.normal {
+  background: #4b5563;
+}
+.low {
+  background: #60a5fa;
+}
+.high {
+  background: #111827;
+}
+
+/* Tarjeta textos */
+h3 {
+  margin: 10px 0 5px 0;
+  font-size: 17px;
+}
+
+p {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 12px 0;
+}
+
+/* Footer */
+.ticket-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ticket-footer .time {
+  margin-left: auto;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+/* Progress bars */
+.progress {
+  margin-top: 10px;
+  height: 6px;
+  background: #111827;
+  border-radius: 4px;
+}
+
+.small {
+  width: 40%;
+}
+.medium {
+  width: 80%;
+}
+
+/* DOTS */
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.blue {
+  background: #2563eb;
+}
+.purple {
+  background: #7c3aed;
+}
+.gray {
+  background: #374151;
+}
+.crear-ticket-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #007bff; /* Azul */
+  color: white;
+  border-radius: 50%;
+  font-size: 40px;
+  text-align: center;
+  line-height: 55px;
+  text-decoration: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+}
+
+.crear-ticket-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}

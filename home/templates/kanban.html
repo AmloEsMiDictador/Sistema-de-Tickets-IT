@@ -1,0 +1,147 @@
+{% extends 'sideBar.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kanban Tickets</title>
+    <link rel="stylesheet" href="{% static 'css/Tickets.css' %}" />
+  </head>
+  <body>
+    <div class="kanban-container">
+      <!-- NUEVO -->
+      <div class="kanban-column">
+        <div class="kanban-header">
+          <span class="dot blue"></span>
+          <h2>Nuevo <span class="count">{{ nuevo.count }}</span></h2>
+          <span class="menu">⋯</span>
+        </div>
+
+        {% for t in nuevo %}
+        <div class="ticket-card" onclick="openTicket({{ t.id }})">
+          <!-- 🚀 -->
+          <div class="ticket-id">#TK-{{ t.id }}</div>
+
+          <span
+            class="badge {% if t.prioridad == 1 %}low {% elif t.prioridad == 2 %}normal {% else %}high{% endif %}"
+          >
+            {% if t.prioridad == 1 %}Baja {% elif t.prioridad == 2 %}Normal {%
+            else %}Alta{% endif %}
+          </span>
+
+          <h3>{{ t.titulo }}</h3>
+          <p>{{ t.descripcion|truncatechars:90 }}</p>
+
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>{{ t.asignado }}</span>
+            <span class="time">{{ t.fecha_creacion|timesince }} atrás</span>
+          </div>
+        </div>
+        {% empty %}
+        <p class="empty">Sin tickets</p>
+        {% endfor %}
+      </div>
+
+      <!-- EN PROGRESO -->
+      <div class="kanban-column">
+        <div class="kanban-header">
+          <span class="dot purple"></span>
+          <h2>
+            En Progreso <span class="count">{{ en_progreso.count }}</span>
+          </h2>
+          <span class="menu">⋯</span>
+        </div>
+
+        {% for t in en_progreso %}
+        <div class="ticket-card" onclick="openTicket({{ t.id }})">
+          <!-- 🚀 -->
+          <div class="ticket-id">#TK-{{ t.id }}</div>
+
+          <span
+            class="badge {% if t.prioridad == 1 %}low {% elif t.prioridad == 2 %}normal {% else %}high{% endif %}"
+          >
+            {% if t.prioridad == 1 %}Baja {% elif t.prioridad == 2 %}Normal {%
+            else %}Alta{% endif %}
+          </span>
+
+          <h3>{{ t.titulo }}</h3>
+          <p>{{ t.descripcion|truncatechars:90 }}</p>
+
+          <div class="ticket-footer">
+            <img src="https://i.imgur.com/OGJndPa.png" class="avatar" />
+            <span>{{ t.asignado }}</span>
+            <span class="time">{{ t.fecha_creacion|timesince }} atrás</span>
+          </div>
+
+          <div class="progress"></div>
+        </div>
+        {% empty %}
+        <p class="empty">Sin tickets</p>
+        {% endfor %}
+      </div>
+
+      <!-- FINALIZADO (AÚN ESTÁTICO) -->
+      <div class="kanban-column">
+        <div class="kanban-header">
+          <span class="dot gray"></span>
+          <h2>Finalizado <span class="count">3</span></h2>
+          <span class="menu">⋯</span>
+        </div>
+
+        <!-- Puedes igualar esta parte después -->
+      </div>
+    </div>
+    <!-- BOTÓN FLOTANTE PARA CREAR TICKET -->
+    <a href="{% url 'newTicket' %}" class="crear-ticket-btn"> + </a>
+  </body>
+
+  <script>
+    // Funciones extras (las dejé intactas)
+    function showMessage(msg) {
+      alert(msg);
+    }
+    function highlightCard(card) {
+      card.style.backgroundColor = "#eef2ff";
+    }
+    function resetCard(card) {
+      card.style.backgroundColor = "";
+    }
+    function initDragSystem() {
+      console.log("Sistema drag listo");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initDragSystem();
+    });
+    // 🚀 FUNCIÓN CORRECTA PARA ABRIR UN TICKET
+    function openTicket(id) {
+      window.location.href = "/ticket/" + id + "/";
+      // IMPORTANTE: termina con "/" porque Django lo espera así
+    }
+  </script>
+  <style>
+    .crear-ticket-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background-color: #007bff; /* Azul */
+      color: white;
+      border-radius: 50%;
+      font-size: 40px;
+      text-align: center;
+      line-height: 55px;
+      text-decoration: none;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      transition: 0.3s;
+    }
+
+    .crear-ticket-btn:hover {
+      background-color: #0056b3;
+      transform: scale(1.1);
+    }
+  </style>
+  {% endblock %}
+</html>
